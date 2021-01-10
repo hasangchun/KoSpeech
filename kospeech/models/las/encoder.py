@@ -109,7 +109,7 @@ class Listener(BaseRNN):
 
         else:
             conv_feat = self.conv(inputs.unsqueeze(1), input_lengths).to(self.device)
-            conv_feat = conv_feat.permute(0, 3, 1, 2)
+            conv_feat = conv_feat.permute(0, 3, 1, 2).contiguous()
 
             batch_size, seq_length, num_channels, hidden_dim = conv_feat.size()
             conv_feat = conv_feat.contiguous().view(batch_size, seq_length, num_channels * hidden_dim)
